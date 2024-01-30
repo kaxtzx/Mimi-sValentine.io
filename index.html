@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La mia Valentine</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap" rel="stylesheet">
+    <!-- Carica Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         body {
             font-family: 'Cormorant Garamond', serif;
@@ -58,20 +60,35 @@
             background-color: #f44336;
             color: white;
             border: none;
-            left: calc(50% + 60px); /* Posizione iniziale per il bottone "No" */
+            left: calc(50% + 70px); /* Posizione iniziale per il bottone "No" */
             top: calc(50% + 30px); /* Posizione iniziale per il bottone "No" */
             transform: translate(-50%, -50%); /* Centra il bottone "No" rispetto al suo contenitore */
         }
         .carousel {
             margin: 0 auto 20px; /* Imposta margine inferiore per lo spazio tra le immagini e la scritta */
-            width: 20%; /* Imposta la larghezza desiderata */
+            width: 50%; /* Imposta la larghezza desiderata */
             border: 2px solid #ffc8de; /* Aggiunge una cornice */
             border-radius: 20px; /* Arrotonda i bordi */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Aggiunge un'ombra */
             overflow: hidden; /* Nasconde parte delle immagini che superano i bordi */
         }
-        .carousel-inner {
-            text-align: left; /* Allinea il testo a sinistra all'interno del carousel */
+        .carousel-inner img {
+            width: 40%; /* Fai in modo che le immagini nel carousel si adattino alla larghezza del carousel */
+            height: auto; /* Altezza automatica per mantenere le proporzioni */
+        }
+        .carousel-item {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            backface-visibility: hidden; /* Aggiungi questa riga per eliminare il flicker */
+        }
+        .carousel-item.active {
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+            backface-visibility: hidden; /* Aggiungi questa riga per eliminare il flicker */
+}
+        }
+        .carousel-item-next, .carousel-item-prev, .carousel-item.active {
+            display: block !important; /* Assicura che gli elementi del carousel siano visibili */
         }
     </style>
 </head>
@@ -79,7 +96,7 @@
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="ora.jpg" class="d-block w-100" alt="Foto di Valentine">
+                <img src="ora2.jpg" class="d-block w-100" alt="Foto di Valentine">
             </div>
             <div class="carousel-item">
                 <img src="ora1.jpg" class="d-block w-100" alt="Foto di Valentine">
@@ -96,31 +113,36 @@
         <button id="no-button" class="button" onclick="moveNoButton()">NO</button>
     </div>
 
+    <!-- Carica Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        // Imposta lo scorrimento automatico del carousel
+        $('.carousel').carousel({
+            interval: 2000 // Cambia immagine ogni 2 secondi
+        });
+
         function goToPage() {
             window.location.href = "pagina1.html"; // Reindirizza alla pagina 1
         }
 
         function moveNoButton() {
-        var button = document.getElementById("no-button");
-        var container = document.querySelector(".button-container");
-        var containerRect = container.getBoundingClientRect(); // Ottieni le dimensioni del contenitore
-        var buttonRect = button.getBoundingClientRect(); // Ottieni le dimensioni del bottone
-        var maxWidth = containerRect.width - buttonRect.width; // Massima larghezza disponibile
-        var maxHeight = containerRect.height - buttonRect.height; // Massima altezza disponibile
-        var minDistance = 50; // Distanza minima tra le posizioni
-        var prevX = parseFloat(button.style.left) || buttonRect.left; // Posizione X precedente
-        var prevY = parseFloat(button.style.top) || buttonRect.top; // Posizione Y precedente
-        var randomX, randomY;
+            var button = document.getElementById("no-button");
+            var container = document.querySelector(".button-container");
+            var maxWidth = container.offsetWidth - button.offsetWidth; // Massima larghezza disponibile
+            var maxHeight = container.offsetHeight - button.offsetHeight; // Massima altezza disponibile
+            var minDistance = 50; // Distanza minima tra le posizioni
+            var prevX = parseFloat(button.style.left) || 0; // Posizione X precedente
+            var prevY = parseFloat(button.style.top) || 0; // Posizione Y precedente
+            var randomX, randomY;
 
-        do {
-            randomX = Math.floor(Math.random() * (maxWidth + 1)); // Coordinata X casuale
-            randomY = Math.floor(Math.random() * (maxHeight + 1)); // Coordinata Y casuale
-        } while (Math.abs(randomX - prevX) < minDistance && Math.abs(randomY - prevY) < minDistance);
+            do {
+                randomX = Math.floor(Math.random() * (maxWidth + 1)); // Coordinata X casuale
+                randomY = Math.floor(Math.random() * (maxHeight + 1)); // Coordinata Y casuale
+            } while (Math.abs(randomX - prevX) < minDistance && Math.abs(randomY - prevY) < minDistance);
 
-        button.style.left = randomX + "px"; // Imposta la coordinata X casuale
-        button.style.top = randomY + "px"; // Imposta la coordinata Y casuale
-    }
+            button.style.left = randomX + "px"; // Imposta la coordinata X casuale
+            button.style.top = randomY + "px"; // Imposta la coordinata Y casuale
+        }
     </script>
 </body>
 </html>
