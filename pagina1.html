@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La tua pagina con sfondo GIF</title>
+    <style>
+        body {
+            background-image: url('lagif1.gif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif; /* Font più tranquillo */
+        }
+        #contenitore {
+            text-align: center;
+        }
+        .immagine {
+            width: 20%; /* Larghezza del 20% per ciascuna immagine */
+            height: auto; /* Per mantenere le proporzioni */
+            border: 5px solid white; /* Aggiunge una cornice bianca */
+        }
+        .testo {
+            color: white;
+            font-size: 18px;
+        }
+        .link {
+            color: white;
+            text-decoration: underline; /* Sottolinea il link */
+            font-size: 22px;
+            margin-top: 20px; /* Aggiunge spazio sopra il link */
+            display: block; /* Rende il link un blocco, quindi occupa l'intera larghezza disponibile */
+        }
+    </style>
+</head>
+<body>
+    <div id="contenitore">
+        <img src="ora3.jpg" alt="Immagine 1" class="immagine">
+        <img src="ora4.jpg" alt="Immagine 2" class="immagine">
+        <p class="testo">RISPOSTA ESATTA!</p>
+        <p class="testo">Tanti auguri di San Valentino.</p>
+        <p class="testo">In attesa di un San Valentino insieme,</p>
+        <p class="testo">Ti amo Mara De Cono. 💖</p>
+        <br>
+        <a href="index.html" class="link">Torna alla pagina principale</a>
+    </div>
+</body>
+</html>
