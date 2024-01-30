@@ -66,7 +66,7 @@
         }
         .carousel {
             margin: 0 auto 20px; /* Imposta margine inferiore per lo spazio tra le immagini e la scritta */
-            width: 50%; /* Imposta la larghezza desiderata */
+            width: 40%; /* Imposta la larghezza desiderata */
             border: 2px solid #ffc8de; /* Aggiunge una cornice */
             border-radius: 20px; /* Arrotonda i bordi */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Aggiunge un'ombra */
@@ -77,19 +77,24 @@
             height: auto; /* Altezza automatica per mantenere le proporzioni */
         }
         .carousel-item {
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            backface-visibility: hidden; /* Aggiungi questa riga per eliminare il flicker */
-        }
-        .carousel-item.active {
-            opacity: 1;
-            transition: opacity 1s ease-in-out;
-            backface-visibility: hidden; /* Aggiungi questa riga per eliminare il flicker */
+    position: relative; /* Imposta la posizione relativa per consentire l'uso di z-index */
+    z-index: 1; /* Assicura che la foto attiva sia sopra quella successiva */
 }
-        }
-        .carousel-item-next, .carousel-item-prev, .carousel-item.active {
-            display: block !important; /* Assicura che gli elementi del carousel siano visibili */
-        }
+
+.carousel-item.active {
+    opacity: 0; /* Imposta l'opacità a 0 all'inizio */
+    z-index: 2; /* Porta la foto attiva sopra quella successiva */
+    transition-delay: 0.5s; /* Ritardo per far iniziare il fade out poco prima */
+}
+
+.carousel-item-next {
+    opacity: 1; /* Assicura che la foto successiva sia visibile */
+    position: absolute; /* Imposta la posizione assoluta per posizionare sotto la foto attiva */
+    top: 0; /* Posizione iniziale in cima alla foto attiva */
+    left: 0; /* Posizione iniziale a sinistra della foto attiva */
+    z-index: 0; /* Porta la foto successiva sotto quella attiva */
+}
+
     </style>
 </head>
 <body>
